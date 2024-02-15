@@ -1,8 +1,19 @@
 <script lang="ts" setup>
+type Talk = {
+  cursor: string;
+  talk: {
+    conference: string;
+    date: string;
+    link: string;
+    location: string;
+    talk: string;
+  };
+};
+
 const amount = ref(3);
 const cursor = ref(false);
 const nextPage = ref(false);
-const talks = ref([]);
+const talks = ref<Talk[]>([]);
 const total = ref(0);
 
 const { refresh } = useAsyncData("talksResult", async () => {
@@ -50,7 +61,7 @@ const { refresh } = useAsyncData("talksResult", async () => {
   const { page } = json.data;
   const { endCursor, hasNextPage } = page.pageInfo;
 
-  page.talks.forEach((talk) => {
+  page.talks.forEach((talk: Talk) => {
     talks.value.push(talk);
   });
 

@@ -1,75 +1,11 @@
-# Nuxt 3 Minimal Starter
+# How to implement load more with Nuxt 3 and Hygraph
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This demo shows how to implement "load more" with Nuxt 3 and Hygraph.
+Make sure you copy your high performance API endpoint from the Hygraph webapp and make sure you have permissions to query it.
 
-## Setup
+## Useful Links
 
-Make sure to install the dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- Check out our docs entry for [pagination](https://hygraph.com/docs/api-reference/content-api/pagination).
+- Join our [community](https://slack.hygraph.com).
+- Read the [docs](https://hygraph.com/docs).
+- [Get started](https://app.hygraph.com/signup) for free.
