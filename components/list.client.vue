@@ -56,7 +56,6 @@ const { refresh, pending } = useAsyncData("postssResult", async () => {
 
   cursor.value = endCursor;
   nextPage.value = hasNextPage;
-  total.value = pages.aggregate.count;
 });
 </script>
 
