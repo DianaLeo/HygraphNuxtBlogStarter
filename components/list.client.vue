@@ -1,24 +1,15 @@
 <script lang="ts" setup>
-type Talk = {
-  cursor: string;
-  talk: {
-    conference: string;
-    date: string;
-    link: string;
-    location: string;
-    talk: string;
-  };
-};
+import type { Post } from "../types";
 
 const amount = ref(3);
 const cursor = ref(false);
 const nextPage = ref(false);
-const talks = ref<Talk[]>([]);
+const posts = ref<Post[]>([]);
 const total = ref(0);
 
-const { refresh } = useAsyncData("talksResult", async () => {
+const { refresh, pending } = useAsyncData("postssResult", async () => {
   const results = await fetch(
-    "https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clifk2kla052e01ui88kyhe0c/master",
+    "https://us-east-1-shared-usea1-02.cdn.hygraph.com/content/clcrreocx0oot01ur229906i3/master",
     {
       method: "POST",
       headers: {
@@ -27,24 +18,22 @@ const { refresh } = useAsyncData("talksResult", async () => {
 
       body: JSON.stringify({
         query: `
-          query Talks($cursor: String, $amount: Int!) {
-            page: talksConnection(after: $cursor, first: $amount, orderBy: date_DESC) {
-              talks: edges {
-              cursor
-                talk: node {
-                  conference
-                  date
-                  link
-                  location
-                  talk
-                }
-              }
+          query Posts($cursor: String, $amount: Int!) {
+            pages: postsConnection(after: $cursor, first: $amount, orderBy: createdAt_DESC) {
               pageInfo {
                 hasNextPage
                 endCursor
               }
-              aggregate {
-                count
+              posts: edges {
+                cursor
+                post: node {
+                  slug
+                  id
+                  createdAt
+                  content {
+                    html
+                  }
+                }
               }
             }
           }
@@ -58,68 +47,37 @@ const { refresh } = useAsyncData("talksResult", async () => {
   );
 
   const json = await results.json();
-  const { page } = json.data;
-  const { endCursor, hasNextPage } = page.pageInfo;
+  const { pages } = json.data;
+  const { endCursor, hasNextPage } = pages.pageInfo;
 
-  page.talks.forEach((talk: Talk) => {
-    talks.value.push(talk);
+  pages.posts.forEach((post: Post) => {
+    posts.value.push(post);
   });
 
   cursor.value = endCursor;
   nextPage.value = hasNextPage;
-  total.value = page.aggregate.count;
+  total.value = pages.aggregate.count;
 });
 </script>
 
 <template>
-  <div class="wrapper">
-    <h1>Tim's conference talks</h1>
-    <ul>
-      <li v-for="talkObject in talks" :key="talkObject.cursor">
-        <p class="conference">{{ talkObject.talk.conference }}</p>
-        <p>{{ talkObject.talk.talk }}</p>
-      </li>
-    </ul>
-    <p class="talk-status">
-      Showing {{ talks.length }} out of {{ total }} talks
-    </p>
-    <button v-if="nextPage" @click="refresh()">Load More</button>
+  <div>
+    <post
+      v-for="postObject in posts"
+      :key="postObject.cursor"
+      :post="postObject"
+    />
+
+    <div v-if="pending" class="bg-white mb-4 p-4 rounded-md text-center">
+      Loading...
+    </div>
+
+    <button
+      class="bg-white mb-4 p-4 rounded-md"
+      v-if="nextPage && !pending"
+      @click="refresh()"
+    >
+      Get More
+    </button>
   </div>
 </template>
-
-<style>
-.wrapper {
-  margin: 5rem auto;
-  max-width: 400px;
-  list-style: none;
-  font-family: sans-serif;
-}
-
-ul {
-  padding: 0;
-  list-style: none;
-  margin: 0 0 2rem 0;
-}
-
-li {
-  margin: 0 0 1rem 0;
-}
-
-h1 {
-  font-size: 1.5rem;
-  margin: 0 0 2rem;
-}
-
-p {
-  margin: 0;
-}
-
-p.conference {
-  font-weight: bold;
-}
-
-.talk-status {
-  margin: 0 0 0.5rem 0;
-  font-size: 0.8rem;
-}
-</style>
