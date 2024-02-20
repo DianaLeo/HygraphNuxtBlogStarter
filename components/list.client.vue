@@ -5,10 +5,9 @@ const amount = ref(3);
 const cursor = ref(false);
 const nextPage = ref(false);
 const posts = ref<Post[]>([]);
-const total = ref(0);
 
-const { refresh, pending } = useAsyncData("postssResult", async () => {
-  const results = await fetch(
+const { refresh, pending } = useAsyncData("postsResult", async () => {
+  const results = await $fetch(
     "https://us-east-1-shared-usea1-02.cdn.hygraph.com/content/clcrreocx0oot01ur229906i3/master",
     {
       method: "POST",
@@ -16,7 +15,7 @@ const { refresh, pending } = useAsyncData("postssResult", async () => {
         "Content-Type": "application/json",
       },
 
-      body: JSON.stringify({
+      body: {
         query: `
           query Posts($cursor: String, $amount: Int!) {
             pages: postsConnection(after: $cursor, first: $amount, orderBy: createdAt_DESC) {
@@ -42,12 +41,11 @@ const { refresh, pending } = useAsyncData("postssResult", async () => {
           amount: amount.value,
           cursor: cursor.value || null,
         },
-      }),
+      },
     }
   );
 
-  const json = await results.json();
-  const { pages } = json.data;
+  const { pages } = results.data;
   const { endCursor, hasNextPage } = pages.pageInfo;
 
   pages.posts.forEach((post: Post) => {
