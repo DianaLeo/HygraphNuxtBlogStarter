@@ -1,4 +1,4 @@
-# Hygraph Microblog Starter Next
+# Hygraph Microblog Starter Nuxt
 
 This is a demo that corresponds to [this article](https://hygraph.com/blog/lazy-load-content-astro-hygraph-pagination) about Hygraph pagination.
 
