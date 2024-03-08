@@ -1,12 +1,19 @@
-# How to implement load more with Nuxt 3 and Hygraph
+# Hygraph Microblog Starter Next
 
-This demo shows how to implement "load more" with Nuxt 3 and Hygraph.
-Make sure you copy your high performance API endpoint from the Hygraph webapp and make sure you have permissions to query it.
+This is a demo that corresponds to [this article](https://hygraph.com/blog/lazy-load-content-astro-hygraph-pagination) about Hygraph pagination.
 
-## Useful Links
+## Getting Started
 
-- See this demo in action on Vercel: [https://hygraph-readmore-nuxt.vercel.app/](https://hygraph-readmore-nuxt.vercel.app/)
-- Check out our docs entry for [pagination](https://hygraph.com/docs/api-reference/content-api/pagination).
-- Join our [community](https://slack.hygraph.com).
-- Read the [docs](https://hygraph.com/docs).
-- [Get started](https://app.hygraph.com/signup) for free.
+For the quickest start, use the button below to clone the Hygraph project with schemas and content.
+
+[![Clone project](https://hygraph.com/button)](https://app.hygraph.com/clone/17eb970b42d544c595b5772ba3614551?name=Microblog)
+
+For a slightly slower start, you'll need a new Hygraph project with a `post` schema that has a `slug` and `content` field. `content` should be a Rich Text field.
+
+To run the site locally run the following commands in your CLI.
+
+```
+npx degit git@github.com:hygraph/hygraph-next-microblog-starter.git
+
+cd hygraph-next-microblog-starter && npm install
+```
