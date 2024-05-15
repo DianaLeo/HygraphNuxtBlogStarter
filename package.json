@@ -10,12 +10,19 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@graphcms/rich-text-html-renderer": "^0.3.0",
+    "@graphcms/rich-text-types": "^0.5.1",
     "@tailwindcss/typography": "^0.5.10",
+    "@types/node": "^20.12.12",
+    "graphql-tag": "^2.12.6",
     "nuxt": "^3.10.3",
+    "typescript": "^5.4.5",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue-tsc": "^2.0.17"
   },
   "devDependencies": {
+    "@nuxtjs/apollo": "^5.0.0-alpha.14",
     "@nuxtjs/tailwindcss": "^6.11.4"
   }
 }

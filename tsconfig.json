@@ -1,4 +1,21 @@
 {
-  // https://nuxt.com/docs/guide/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json"
+  "files": [".nuxt/types/schema.d.ts"],
+  "include": [],
+  "extends": "./.nuxt/tsconfig.json",
+  "ts-node": {
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "ES6"
+    }
+  },
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "allowArbitraryExtensions": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
 }
