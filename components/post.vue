@@ -26,7 +26,7 @@ const timeString = computed(() => {
 </script>
 
 <template>
-  <div class="prose bg-white max-w-4xl mb-4 p-4 rounded-md">
+  <div class="prose bg-black text-white max-w-4xl mb-4 p-4 rounded-md">
     <div v-html="content.html" />
     <time :dateTime="createdAt">
       <span> {{ dateString }} at {{ timeString }} </span>

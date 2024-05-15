@@ -1,6 +1,6 @@
 <template>
   <div class="container max-w-full min-h-screen bg-brand">
-    <div class="mx-auto max-w-xl px-4 py-8">
+    <div class="mx-auto max-w-[800px] px-4 py-8">
       <h1 class="text-4xl text-white font-bold mb-4">My Microblog</h1>
       <list />
     </div>

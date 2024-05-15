@@ -8,7 +8,7 @@ const posts = ref<Post[]>([]);
 
 const { refresh, pending } = useAsyncData("postsResult", async () => {
   const results = await $fetch(
-    "https://us-east-1-shared-usea1-02.cdn.hygraph.com/content/clcrreocx0oot01ur229906i3/master",
+    "https://ap-southeast-2.cdn.hygraph.com/content/clw7795ev000008l4c7ya1hvq/master",
     {
       method: "POST",
       headers: {
